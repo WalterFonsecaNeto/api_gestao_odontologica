@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "+3E30Ey+t4tGPjlJI+tRiHJeiIY+8ywKCqBLSsffL41JxMbXM9zsPs+GD0EyLIPEd9e2411paVkWHkN6MZYHMg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Walter Fonseca Neto\\Desktop\\Projetos\\Projeto_Odontologico\\ProjetoOdontologico\\ProjetoOdontologico.Api\\ProjetoOdontologico.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Walter Fonseca Neto\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\Walter Fonseca Neto\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Walter Fonseca Neto\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\Walter Fonseca Neto\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\Walter Fonseca Neto\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\Walter Fonseca Neto\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
