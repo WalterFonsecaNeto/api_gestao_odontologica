@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoOdontologico.Dominio", "ProjetoOdontologico.Dominio\ProjetoOdontologico.Dominio.csproj", "{4EFF12DB-C0A5-4B3C-B62A-9ABC53A8E8D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoOdontologico.Repositorio", "ProjetoOdontologico.Repositorio\ProjetoOdontologico.Repositorio.csproj", "{0B0D9DDE-D008-4131-9D2B-1A2690372B97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoOdontologico.Aplicacao", "ProjetoOdontologico.Aplicacao\ProjetoOdontologico.Aplicacao.csproj", "{C9CD963B-7233-46FB-8948-B0EC09404ED9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoOdontologico.Api", "ProjetoOdontologico.Api\ProjetoOdontologico.Api.csproj", "{B6F1154F-405E-4D01-B2F4-F80D996E01B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EFF12DB-C0A5-4B3C-B62A-9ABC53A8E8D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EFF12DB-C0A5-4B3C-B62A-9ABC53A8E8D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EFF12DB-C0A5-4B3C-B62A-9ABC53A8E8D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EFF12DB-C0A5-4B3C-B62A-9ABC53A8E8D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B0D9DDE-D008-4131-9D2B-1A2690372B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B0D9DDE-D008-4131-9D2B-1A2690372B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B0D9DDE-D008-4131-9D2B-1A2690372B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B0D9DDE-D008-4131-9D2B-1A2690372B97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9CD963B-7233-46FB-8948-B0EC09404ED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9CD963B-7233-46FB-8948-B0EC09404ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9CD963B-7233-46FB-8948-B0EC09404ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9CD963B-7233-46FB-8948-B0EC09404ED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6F1154F-405E-4D01-B2F4-F80D996E01B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F1154F-405E-4D01-B2F4-F80D996E01B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F1154F-405E-4D01-B2F4-F80D996E01B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F1154F-405E-4D01-B2F4-F80D996E01B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
