@@ -5,7 +5,7 @@ namespace ProjetoOdontologico.Aplicacao
     public interface IFormaPagamentoAplicacao
     {
         public Task<int> CriarFormaPagamentoAsync(FormaPagamento formaPagamento);
-        public Task AtualizarFormaPagamentoAsync(FormaPagamento formaPagamento, int usuarioId);
+        public Task AtualizarFormaPagamentoAsync(FormaPagamento formaPagamento, int usuarioId, int formaPagamentoId);
 
         public Task<FormaPagamento> ObterFormaPagamentoPorIdAsync(int formaPagamentoId, int usuarioId, bool ativo);
 

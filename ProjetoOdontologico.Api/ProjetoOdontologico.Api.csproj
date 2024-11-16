@@ -2,12 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjetoOdontologico.Dominio\ProjetoOdontologico.Dominio.csproj" />
+    <ProjectReference Include="..\ProjetoOdontologico.Repositorio\ProjetoOdontologico.Repositorio.csproj" />
+    <ProjectReference Include="..\ProjetoOdontologico.Aplicacao\ProjetoOdontologico.Aplicacao.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,32 +9,43 @@ namespace ProjetoOdontologico.Aplicacao
 
         #region Atributos
         readonly IFormaPagamentoRepositorio _formaPagamentoRepositorio;
+        readonly IUsuarioRepositorio _usuarioRepositorio;
 
         #endregion
 
 
         #region Contrutores 
-        public FormaPagamentoAplicacao(IFormaPagamentoRepositorio formaPagamentoRepositorio)
+        public FormaPagamentoAplicacao(IFormaPagamentoRepositorio formaPagamentoRepositorio, IUsuarioRepositorio usuarioRepositorio)
         {
             _formaPagamentoRepositorio = formaPagamentoRepositorio;
+            _usuarioRepositorio = usuarioRepositorio;
         }
 
         #endregion
 
 
         #region Funções
+
+        //! Fazer essa verificação para todos, pra ver se o usuarioId pertence a algum usuario mesmo
         public async Task<int> CriarFormaPagamentoAsync(FormaPagamento formaPagamento)
         {
             ValidarInformacoesObrigatorias(formaPagamento);
 
-            int formaPagamentoSalvaID = await _formaPagamentoRepositorio.SalvarAsync(formaPagamento);
+            var usuarioEncontrado = await _usuarioRepositorio.ObterPorIdAsync(formaPagamento.UsuarioId, true);
 
-            return formaPagamentoSalvaID;
+            if (usuarioEncontrado == null)
+            {
+                throw new Exception("Usuário não encontrado.");
+            }
+
+            int formaPagamentoSalvaId = await _formaPagamentoRepositorio.SalvarAsync(formaPagamento);
+
+            return formaPagamentoSalvaId;
         }
 
-        public async Task AtualizarFormaPagamentoAsync(FormaPagamento formaPagamento, int usuarioId)
+        public async Task AtualizarFormaPagamentoAsync(FormaPagamento formaPagamento, int usuarioId, int formaPagamentoId)
         {
-            var formaPagamentoEncontrada = await _formaPagamentoRepositorio.ObterPorIdAsync(formaPagamento.Id, usuarioId, true);
+            var formaPagamentoEncontrada = await _formaPagamentoRepositorio.ObterPorIdAsync(formaPagamentoId, usuarioId, true);
 
             ValidarExistenciaDaFormaDePagamento(formaPagamentoEncontrada);
 
@@ -54,7 +65,7 @@ namespace ProjetoOdontologico.Aplicacao
 
         public async Task DeletarFormaPagamentoAsync(int formaPagamentoId, int usuarioId)
         {
-            var formaPagamentoEncontrada = await _formaPagamentoRepositorio.ObterPorIdAsync(formaPagamentoId,  usuarioId, true);
+            var formaPagamentoEncontrada = await _formaPagamentoRepositorio.ObterPorIdAsync(formaPagamentoId, usuarioId, true);
 
             ValidarExistenciaDaFormaDePagamento(formaPagamentoEncontrada);
 
@@ -98,7 +109,7 @@ namespace ProjetoOdontologico.Aplicacao
             {
                 throw new Exception("Nome da forma de pagamento não pode ser vazia.");
             }
-            
+
 
         }
 
@@ -110,14 +121,9 @@ namespace ProjetoOdontologico.Aplicacao
             }
         }
 
-        private static FormaPagamento ValidarInformacoesPraAtualizacao(FormaPagamento formaPagamento, FormaPagamento formaPagamentoEncontrada) 
+        private static FormaPagamento ValidarInformacoesPraAtualizacao(FormaPagamento formaPagamento, FormaPagamento formaPagamentoEncontrada)
         {
-
-            if (string.IsNullOrEmpty(formaPagamento.Nome))
-            {
-                formaPagamentoEncontrada.Nome = formaPagamentoEncontrada.Nome;
-            }
-            else
+            if (!string.IsNullOrEmpty(formaPagamento.Nome))
             {
                 formaPagamentoEncontrada.Nome = formaPagamento.Nome;
             }
@@ -129,6 +135,6 @@ namespace ProjetoOdontologico.Aplicacao
             //! QUANDO FOR REALIZAR A EXCLUSÃO VERIFICAR SE A FORMA DE PAGAMENTO ESTÁ SENDO UTILIZADA
         }
         #endregion
-    
+
     }
 }

@@ -34,25 +34,22 @@ namespace ProjetoOdontologico.Aplicacao
             return await _usuarioRepositorio.SalvarAsync(usuario);
         }
 
-        public async Task AtualizarUsuarioAsync(Usuario usuario)
+        public async Task AtualizarUsuarioAsync(Usuario usuario, int usuarioId)
         {
-            var usuarioEncontrado = await _usuarioRepositorio.ObterPorIdAsync(usuario.Id, true);
+            var usuarioEncontrado = await _usuarioRepositorio.ObterPorIdAsync(usuarioId, true);
 
             if (usuarioEncontrado == null)
             {
                 throw new Exception("Usuário não encontrado");
             }
-            ValidarInformacoesUsuario(usuario);
-
-            usuarioEncontrado.Nome = usuario.Nome;
-            usuarioEncontrado.Email = usuario.Email;
+            ValidarInformacoesParaAtualizar(usuario, usuarioEncontrado);
 
             await _usuarioRepositorio.AtualizarAsync(usuarioEncontrado);
         }
 
-        public async Task AlterarSenhaAsync(Usuario usuario, string senhaAntiga)
+        public async Task AlterarSenhaAsync(string senhaNova, string senhaAntiga, int usuarioId)
         {
-            var usuarioEncontrado = await _usuarioRepositorio.ObterPorIdAsync(usuario.Id, true);
+            var usuarioEncontrado = await _usuarioRepositorio.ObterPorIdAsync(usuarioId, true);
 
             if (usuarioEncontrado == null)
             {
@@ -62,11 +59,11 @@ namespace ProjetoOdontologico.Aplicacao
             {
                 throw new Exception("Senha antiga incorreta");
             }
-            if (string.IsNullOrEmpty(usuario.Senha))
+            if (string.IsNullOrEmpty(senhaNova))
             {
-                throw new Exception("Senha não pode ser vazia");
+                throw new Exception("Senha nova não pode ser vazia");
             }
-            usuarioEncontrado.Senha = usuario.Senha;
+            usuarioEncontrado.Senha = senhaNova;
 
             await _usuarioRepositorio.AtualizarAsync(usuarioEncontrado);
         }
@@ -125,7 +122,14 @@ namespace ProjetoOdontologico.Aplicacao
             {
                 throw new Exception("Email não pode ser vazia");
             }
-            return await _usuarioRepositorio.ValidarUsuario(usuario);
+            var usuarioEncontrado = await _usuarioRepositorio.ValidarUsuario(usuario);
+
+            if (usuarioEncontrado == null)
+            {
+                throw new Exception("Email ou senha incorretos");
+            }
+            return usuarioEncontrado;
+
 
 
 
@@ -133,7 +137,7 @@ namespace ProjetoOdontologico.Aplicacao
         }
 
         #endregion
-       
+
         #region Util
         private static void ValidarInformacoesUsuario(Usuario usuario)
         {
@@ -146,7 +150,26 @@ namespace ProjetoOdontologico.Aplicacao
                 throw new Exception("Email não pode ser vazio");
             }
         }
-        
+        private static void ValidarInformacoesParaAtualizar(Usuario usuario, Usuario usuarioEncontrado)
+        {
+            if (string.IsNullOrEmpty(usuario.Nome))
+            {
+                usuarioEncontrado.Nome = usuarioEncontrado.Nome;
+            }
+            else
+            {
+                usuarioEncontrado.Nome = usuario.Nome;
+            }
+            if (string.IsNullOrEmpty(usuario.Email))
+            {
+                usuarioEncontrado.Email = usuarioEncontrado.Email;
+            }
+            else
+            {
+                usuarioEncontrado.Email = usuario.Email;
+            }
+        }
+
         #endregion
     }
 }

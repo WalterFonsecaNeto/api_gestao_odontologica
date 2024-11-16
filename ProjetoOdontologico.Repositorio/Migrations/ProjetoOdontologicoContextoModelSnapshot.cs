@@ -425,17 +425,15 @@ namespace ProjetoOdontologico.Repositorio.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("Nome");
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
-                        .HasColumnName("Nome");
+                        .HasColumnName("Senha");
 
                     b.HasKey("Id");
 

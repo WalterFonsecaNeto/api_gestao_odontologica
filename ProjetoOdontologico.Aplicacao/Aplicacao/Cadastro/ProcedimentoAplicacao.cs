@@ -6,30 +6,52 @@ namespace ProjetoOdontologico.Aplicacao
 {
     public class ProcedimentoAplicacao : IProcedimentoAplicacao
     {
+
         #region Atributos
         readonly IProcedimentoRepositorio _procedimentoRepositorio;
+        readonly IUsuarioRepositorio _usuarioRepositorio;
+        readonly IEspecialidadeRepositorio _especialidadeRepositorio;
         #endregion
 
+
         #region Construtores
-        public ProcedimentoAplicacao(IProcedimentoRepositorio procedimentoRepositorio)
+        public ProcedimentoAplicacao(IProcedimentoRepositorio procedimentoRepositorio, IUsuarioRepositorio usuarioRepositorio, IEspecialidadeRepositorio especialidadeRepositorio)
         {
             _procedimentoRepositorio = procedimentoRepositorio;
+            _usuarioRepositorio = usuarioRepositorio;
+            _especialidadeRepositorio = especialidadeRepositorio;
         }
         #endregion
+
 
         #region Funções
         public async Task<int> CriarProcedimentoAsync(Procedimento procedimento)
         {
             ValidarInformacoesObrigatorias(procedimento);
 
-            int procedimentoSalvoID = await _procedimentoRepositorio.SalvarAsync(procedimento);
+            //! Fazer essa verificação para todos, pra ver se o usuarioId pertence a algum usuario mesmo
+            var usuarioEncontrado = await _usuarioRepositorio.ObterPorIdAsync(procedimento.UsuarioId, true);
 
-            return procedimentoSalvoID;
+            if (usuarioEncontrado == null)
+            {
+                throw new Exception("Usuário não encontrado.");
+            }
+
+            var especialidadeEncontrada = await _especialidadeRepositorio.ObterPorIdAsync(procedimento.EspecialidadeId, procedimento.UsuarioId, true);
+
+            if (especialidadeEncontrada == null)
+            {
+                throw new Exception("Especialidade não encontrada.");
+            }
+
+            int procedimentoSalvoId = await _procedimentoRepositorio.SalvarAsync(procedimento);
+
+            return procedimentoSalvoId;
         }
 
-        public async Task AtualizarProcedimentoAsync(Procedimento procedimento, int usuarioId)
+        public async Task AtualizarProcedimentoAsync(Procedimento procedimento, int usuarioId, int procedimentoId)
         {
-            var procedimentoEncontrado = await _procedimentoRepositorio.ObterPorIdAsync(procedimento.Id, usuarioId, true);
+            var procedimentoEncontrado = await _procedimentoRepositorio.ObterPorIdAsync(procedimentoId, usuarioId, true);
 
             ValidarExistenciaDoProcedimento(procedimentoEncontrado);
 
@@ -85,7 +107,7 @@ namespace ProjetoOdontologico.Aplicacao
         #region Uteis
         private static void ValidarInformacoesObrigatorias(Procedimento procedimento)
         {
-            
+
             if (procedimento == null)
             {
                 throw new Exception("Procedimento não pode ser vazio.");
@@ -172,7 +194,7 @@ namespace ProjetoOdontologico.Aplicacao
         {
             //! QUANDO FOR REALIZAR A EXCLUSÃO VERIFICAR SE O PROCEDIMENTO ESTÁ SENDO UTILIZADA
         }
-        
+
         #endregion
 
     }
