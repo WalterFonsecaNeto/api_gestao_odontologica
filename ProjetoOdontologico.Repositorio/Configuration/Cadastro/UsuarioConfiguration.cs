@@ -25,7 +25,7 @@ namespace ProjetoOdontologico.Repositorio.Configurations
                 .HasMaxLength(100); 
 
             builder.Property(nameof(Usuario.Senha))
-                .HasColumnName("Nome")
+                .HasColumnName("Senha")
                 .IsRequired(true)
                 .HasMaxLength(100);
 

@@ -8,16 +8,16 @@ namespace ProjetoOdontologico.Aplicacao
 
         #region Atributos
         readonly IEspecialidadeRepositorio _especialidadeRepositorio;
-
+        readonly IUsuarioRepositorio _usuarioRepositorio;
         #endregion
 
 
         #region Contrutores 
-        public EspecialidadeAplicacao(IEspecialidadeRepositorio especialidadeRepositorio)
+        public EspecialidadeAplicacao(IEspecialidadeRepositorio especialidadeRepositorio, IUsuarioRepositorio usuarioRepositorio)
         {
             _especialidadeRepositorio = especialidadeRepositorio;
+            _usuarioRepositorio = usuarioRepositorio;
         }
-
         #endregion
 
 
@@ -26,14 +26,22 @@ namespace ProjetoOdontologico.Aplicacao
         {
             ValidarInformacoesObrigatorias(especialidade);
 
-            int especialidadeSalvaID = await _especialidadeRepositorio.SalvarAsync(especialidade);
+            //! Fazer essa verificação para todos, pra ver se o usuarioId pertence a algum usuario mesmo
+            var usuarioEncontrado = await _usuarioRepositorio.ObterPorIdAsync(especialidade.UsuarioId, true);
 
-            return especialidadeSalvaID;
+            if (usuarioEncontrado == null)
+            {
+                throw new Exception("Usuário não encontrado.");
+            }
+
+            int especialidadeSalvaId = await _especialidadeRepositorio.SalvarAsync(especialidade);
+
+            return especialidadeSalvaId;
         }
 
-        public async Task AtualizarEspecialidadeAsync(Especialidade especialidade, int usuarioId)
+        public async Task AtualizarEspecialidadeAsync(Especialidade especialidade, int usuarioId, int especialidadeId)
         {
-            var especialidadeEncontrada = await _especialidadeRepositorio.ObterPorIdAsync(especialidade.Id, usuarioId, true);
+            var especialidadeEncontrada = await _especialidadeRepositorio.ObterPorIdAsync(especialidadeId, usuarioId, true);
 
             ValidarExistenciaDaEspecialidade(especialidadeEncontrada);
 
@@ -121,7 +129,7 @@ namespace ProjetoOdontologico.Aplicacao
             return especialidadeEncontrada;
         }
 
-        
+
         private static void ValidarInformacoesParaExclusao(Especialidade especialidadeEcontrada)
         {
             //! QUANDO FOR REALIZAR A EXCLUSÃO VERIFICAR SE A ESPECIALIDADE ESTÁ SENDO UTILIZADA

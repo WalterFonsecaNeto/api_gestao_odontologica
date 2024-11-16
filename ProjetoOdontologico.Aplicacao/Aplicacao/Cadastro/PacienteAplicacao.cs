@@ -8,16 +8,16 @@ namespace ProjetoOdontologico.Aplicacao
 
         #region Atributos
         readonly IPacienteRepositorio _pacienteRepositorio;
-
+        readonly IUsuarioRepositorio _usuarioRepositorio;
         #endregion
 
 
         #region Contrutores 
-        public PacienteAplicacao(IPacienteRepositorio pacienteRepositorio)
+        public PacienteAplicacao(IPacienteRepositorio pacienteRepositorio, IUsuarioRepositorio usuarioRepositorio)
         {
             _pacienteRepositorio = pacienteRepositorio;
+            _usuarioRepositorio = usuarioRepositorio;
         }
-
         #endregion
 
 
@@ -26,14 +26,22 @@ namespace ProjetoOdontologico.Aplicacao
         {
             ValidarInformacoesObrigatorias(paciente);
 
-            int pacienteSalvoID = await _pacienteRepositorio.SalvarAsync(paciente);
+            //! Fazer essa verificação para todos, pra ver se o usuarioId pertence a algum usuario mesmo
+            var usuarioEncontrado = await _usuarioRepositorio.ObterPorIdAsync(paciente.UsuarioId, true);
 
-            return pacienteSalvoID;
+            if (usuarioEncontrado == null)
+            {
+                throw new Exception("Usuário não encontrado.");
+            }
+
+            int pacienteSalvoId = await _pacienteRepositorio.SalvarAsync(paciente);
+
+            return pacienteSalvoId;
         }
-
-        public async Task AtualizarPacienteAsync(Paciente paciente, int usuarioId)
+        
+        public async Task AtualizarPacienteAsync(Paciente paciente, int usuarioId, int pacienteId)
         {
-            var pacienteEncontrado = await _pacienteRepositorio.ObterPorIdAsync(paciente.Id, usuarioId, true);
+            var pacienteEncontrado = await _pacienteRepositorio.ObterPorIdAsync(pacienteId, usuarioId, true);
 
             ValidarExistenciaDoPaciente(pacienteEncontrado);
 
@@ -130,81 +138,47 @@ namespace ProjetoOdontologico.Aplicacao
 
         private static Paciente ValidarInformacoesPraAtualizacao(Paciente paciente, Paciente pacienteEncontrado)
         {
-
-            if (string.IsNullOrEmpty(paciente.Nome))
-            {
-                pacienteEncontrado.Nome = pacienteEncontrado.Nome;
-            }
-            else
+            if (!string.IsNullOrEmpty(paciente.Nome))
             {
                 pacienteEncontrado.Nome = paciente.Nome;
             }
 
-            if (string.IsNullOrEmpty(paciente.CPF))
-            {
-                pacienteEncontrado.CPF = pacienteEncontrado.CPF;
-            }
-            else
+            if (!string.IsNullOrEmpty(paciente.CPF))
             {
                 pacienteEncontrado.CPF = paciente.CPF;
             }
 
-            if (string.IsNullOrEmpty(paciente.Endereco))
-            {
-                pacienteEncontrado.Endereco = pacienteEncontrado.Endereco;
-            }
-            else
+            if (!string.IsNullOrEmpty(paciente.Endereco))
             {
                 pacienteEncontrado.Endereco = paciente.Endereco;
             }
 
-            if (string.IsNullOrEmpty(paciente.DataNascimento.ToString()))
-            {
-                pacienteEncontrado.DataNascimento = pacienteEncontrado.DataNascimento;
-            }
-            else
+            if (paciente.DataNascimento.HasValue)
             {
                 pacienteEncontrado.DataNascimento = paciente.DataNascimento;
             }
 
-            if (string.IsNullOrEmpty(paciente.Genero))
-            {
-                pacienteEncontrado.Genero = pacienteEncontrado.Genero;
-            }
-            else
+            if (!string.IsNullOrEmpty(paciente.Genero))
             {
                 pacienteEncontrado.Genero = paciente.Genero;
             }
 
-            if (string.IsNullOrEmpty(paciente.Telefone))
-            {
-                pacienteEncontrado.Telefone = pacienteEncontrado.Telefone;
-            }
-            else
+            if (!string.IsNullOrEmpty(paciente.Telefone))
             {
                 pacienteEncontrado.Telefone = paciente.Telefone;
             }
 
-            if (string.IsNullOrEmpty(paciente.Email))
-            {
-                pacienteEncontrado.Email = pacienteEncontrado.Email;
-            }
-            else
+            if (!string.IsNullOrEmpty(paciente.Email))
             {
                 pacienteEncontrado.Email = paciente.Email;
             }
 
-            if (string.IsNullOrEmpty(paciente.HistoricoMedico))
-            {
-                pacienteEncontrado.HistoricoMedico = pacienteEncontrado.HistoricoMedico;
-            }
-            else
+            if (!string.IsNullOrEmpty(paciente.HistoricoMedico))
             {
                 pacienteEncontrado.HistoricoMedico = paciente.HistoricoMedico;
             }
 
             return pacienteEncontrado;
-
         }
 
         private static void ValidarInformacoesParaExclusao(Paciente pacienteEncontrado)

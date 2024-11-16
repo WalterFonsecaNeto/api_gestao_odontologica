@@ -11,6 +11,7 @@ namespace ProjetoOdontologico.Repositorio
 
         public async Task<int> SalvarAsync(FormaPagamento formaPagamento)
         {
+           
             await _contexto.FormasPagamento.AddAsync(formaPagamento);
             await _contexto.SaveChangesAsync();
 
