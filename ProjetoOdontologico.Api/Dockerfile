@@ -1,19 +1,26 @@
-# Use uma imagem do .NET SDK para buildar o projeto
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+# Defina a imagem base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
+EXPOSE 80
 
-# Copie os arquivos de projeto e restaure as dependências
-COPY *.csproj ./
-RUN dotnet restore
+# Defina a imagem para o build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
 
-# Copie o restante dos arquivos e compile a aplicação
-COPY . ./
-RUN dotnet publish -c Release -o out
+# Copie o arquivo .csproj e restaure as dependências
+COPY ["ProjetoOdontologico.Api/ProjetoOdontologico.Api.csproj", "ProjetoOdontologico.Api/"]
+RUN dotnet restore "ProjetoOdontologico.Api/ProjetoOdontologico.Api.csproj"
 
-# Use uma imagem do .NET Runtime para rodar a aplicação
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+# Copie o restante dos arquivos e construa o projeto
+COPY . .
+WORKDIR "/src/ProjetoOdontologico.Api"
+RUN dotnet build "ProjetoOdontologico.Api.csproj" -c Release -o /app/build
+
+# Publique a aplicação para uma pasta específica
+RUN dotnet publish "ProjetoOdontologico.Api.csproj" -c Release -o /app/publish
+
+# Defina a imagem final e copie os arquivos publicados
+FROM base AS final
 WORKDIR /app
-COPY --from=build-env /app/out .
-
-# Comando de start da aplicação
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "ProjetoOdontologico.Api.dll"]
