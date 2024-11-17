@@ -54,7 +54,7 @@ namespace ProjetoOdontologico.Api
 
 
         [HttpGet]
-        [Route("Listar/Usuario{usuarioId}")]
+        [Route("Listar/Usuario/{usuarioId}")]
         public async Task<IActionResult> ListarPacientesPorUsuarioAsync([FromRoute] int usuarioId, [FromQuery] bool ativo)
         {
             try
