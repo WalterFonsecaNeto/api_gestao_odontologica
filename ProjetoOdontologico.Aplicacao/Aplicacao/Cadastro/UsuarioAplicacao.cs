@@ -28,13 +28,15 @@ namespace ProjetoOdontologico.Aplicacao
             {
                 throw new Exception("Senha não pode ser vazia");
             }
+            ValidarInformacoesUsuario(usuario);
+            
             var usuarioExiste = _usuarioRepositorio.ValidarUsuario(usuario, true);
 
             if (usuarioExiste!= null)
             {
-                throw new Exception("Email ou enha já existe");
+                throw new Exception("Email ou senha já existe");
             }
-            ValidarInformacoesUsuario(usuario);
+            
 
             // Quando tudo estiver correto, o usuário será salvo
             return await _usuarioRepositorio.SalvarAsync(usuario);
