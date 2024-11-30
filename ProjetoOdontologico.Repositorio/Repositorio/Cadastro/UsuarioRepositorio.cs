@@ -51,10 +51,10 @@ namespace ProjetoOdontologico.Repositorio
                 .ToListAsync();
         }
 
-        public async Task<Usuario> ValidarUsuario(Usuario usuario)
+        public async Task<Usuario> ValidarUsuario(Usuario usuario, bool ativo)
         {
             return await _contexto.Usuarios
-                .FirstOrDefaultAsync(u => u.Email == usuario.Email && u.Senha == usuario.Senha);
+                .FirstOrDefaultAsync(u => u.Email == usuario.Email && u.Senha == usuario.Senha && u.Ativo == ativo);
         }
         
     }
