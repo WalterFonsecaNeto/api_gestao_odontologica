@@ -30,11 +30,12 @@ namespace ProjetoOdontologico.Aplicacao
             }
             ValidarInformacoesUsuario(usuario);
             
-            var usuarioExiste = _usuarioRepositorio.ValidarUsuario(usuario, true);
+            var usuarioExiste = await _usuarioRepositorio.ValidarUsuario(usuario, true);
+            
 
-            if (usuarioExiste!= null)
+            if (usuarioExiste != null)
             {
-                throw new Exception("Email ou senha já existe");
+                throw new Exception("Email já existe");
             }
             
 
