@@ -1,3 +1,4 @@
+using System.Xml;
 using ProjetoOdontologico.Dominio.Entidades;
 using ProjetoOdontologico.Repositorio;
 
@@ -105,11 +106,11 @@ namespace ProjetoOdontologico.Aplicacao
             {
                 throw new Exception("agendamento não pode ser vazia");
             }
-            if (agendamento.UsuarioId == 0)
+            if (agendamento.UsuarioId <= 0)
             {
                 throw new Exception("UsuarioId do agendamento não pode ser vazio.");
             }
-            if (agendamento.PacienteId == 0)
+            if (agendamento.PacienteId <= 0)
             {
                 throw new Exception("PacienteId do agendamento não pode ser vazio.");
             }

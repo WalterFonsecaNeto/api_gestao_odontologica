@@ -51,7 +51,7 @@ namespace ProjetoOdontologico.Api
         }
 
         [HttpPut]
-        [Route("Atualizar/{agendamentoId}/Usuario/{usuarioId}")]
+        [Route("AtualizarPorAgendamentoId/{agendamentoId}/Usuario/{usuarioId}")]
         public async Task<IActionResult> AtualizarEspecialidadeAsync([FromRoute] int usuarioId, int agendamentoId, [FromBody] AgendamentoAtualizar agendamentoAtualizar)
         {
             try
@@ -75,7 +75,7 @@ namespace ProjetoOdontologico.Api
         }
 
         [HttpDelete]
-        [Route("Deletar/{agendamentoId}/Usuario/{usuarioId}")]
+        [Route("DeletarPorAgendamentoId/{agendamentoId}/Usuario/{usuarioId}")]
         public async Task<IActionResult> DeletarAgendamentoAsync([FromRoute] int agendamentoId, int usuarioId)
         {
             try
@@ -91,7 +91,7 @@ namespace ProjetoOdontologico.Api
         }
 
         [HttpPut]
-        [Route("Restaurar/{agendamentoId}/Usuario/{usuarioId}")]
+        [Route("RestaurarPorAgendamentoId/{agendamentoId}/Usuario/{usuarioId}")]
         public async Task<IActionResult> RestaurarAgendamentoAsync([FromRoute] int agendamentoId, int usuarioId)
         {
             try
@@ -107,7 +107,7 @@ namespace ProjetoOdontologico.Api
         }
 
         [HttpGet]
-        [Route("Obter/{agendamentoId}/Usuario/{usuarioId}")]
+        [Route("ObterPorAgendamentoId/{agendamentoId}/Usuario/{usuarioId}")]
         public async Task<IActionResult> ObterAgendamentoPorIdAsync([FromRoute] int agendamentoId, int usuarioId, [FromQuery] bool ativo)
         {
             try
@@ -132,7 +132,7 @@ namespace ProjetoOdontologico.Api
         }
 
         [HttpGet]
-        [Route("Listar/Usuario/{usuarioId}")]
+        [Route("ListarPorUsuarioId/{usuarioId}")]
         public async Task<IActionResult> ListarAgendamentoPorUsuarioIdAsync([FromRoute] int usuarioId, [FromQuery] bool ativo)
         {
             try
@@ -156,7 +156,7 @@ namespace ProjetoOdontologico.Api
         }
 
         [HttpGet]
-        [Route("Listar/{pacienteId}/Usuario/{usuarioId}")]
+        [Route("ListarPorPacienteId/{pacienteId}/Usuario/{usuarioId}")]
         public async Task<IActionResult> ListarAgendamentoPorPacienteIdAsync([FromRoute] int pacienteId, int usuarioId, [FromQuery] bool ativo)
         {
             try
