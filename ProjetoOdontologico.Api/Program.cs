@@ -10,6 +10,7 @@ builder.Services.AddScoped<IFormaPagamentoAplicacao,FormaPagamentoAplicacao>();
 builder.Services.AddScoped<IPacienteAplicacao,PacienteAplicacao>();
 builder.Services.AddScoped<IProcedimentoAplicacao,ProcedimentoAplicacao>();
 builder.Services.AddScoped<IUsuarioAplicacao, UsuarioAplicacao>();
+builder.Services.AddScoped<IAgendamentoAplicacao, AgendamentoAplicacao>();
 
 
 // Adicione as interfaces de banco de dados
@@ -18,6 +19,7 @@ builder.Services.AddScoped<IFormaPagamentoRepositorio,FormaPagamentoRepositorio>
 builder.Services.AddScoped<IPacienteRepositorio,PacienteRepositorio>();
 builder.Services.AddScoped<IProcedimentoRepositorio,ProcedimentoRepositorio>();
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+builder.Services.AddScoped<IAgendamentoRepositorio, AgendamentoRepositorio>();
 
 
 

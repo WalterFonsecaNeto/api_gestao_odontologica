@@ -44,7 +44,7 @@ namespace ProjetoOdontologico.Repositorio
             await _contexto.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Agendamento>> ListarAsync(int usuarioId, bool ativo)
+        public async Task<IEnumerable<Agendamento>> ListarPorUsuarioIdAsync(int usuarioId, bool ativo)
         {
             return await _contexto.Agendamentos
                 .Where(a => a.Ativo == ativo && a.UsuarioId == usuarioId)
@@ -52,7 +52,7 @@ namespace ProjetoOdontologico.Repositorio
         }
 
         //? Lista de agendamentos de um determinado paciente
-        public async Task<IEnumerable<Agendamento>> ListarPorPacienteAsync(int usuarioId, int pacienteId, bool ativo)
+        public async Task<IEnumerable<Agendamento>> ListarPorPacienteIdAsync(int usuarioId, int pacienteId, bool ativo)
         {
             return await _contexto.Agendamentos
                 .Where(a => a.Ativo == ativo && a.UsuarioId == usuarioId && a.PacienteId == pacienteId) 

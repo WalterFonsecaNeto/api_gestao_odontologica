@@ -9,7 +9,7 @@ namespace ProjetoOdontologico.Repositorio
         Task<Agendamento> ObterPorIdAsync(int agendamentoId, int usuarioId, bool ativo );
         Task DeletarAsync(Agendamento agendamento);
         Task RestaurarAsync(Agendamento agendamento);
-        Task<IEnumerable<Agendamento>> ListarAsync(int usuarioId, bool ativo);
-        Task<IEnumerable<Agendamento>> ListarPorPacienteAsync(int usuarioId, int pacienteId, bool ativo);
+        Task<IEnumerable<Agendamento>> ListarPorUsuarioIdAsync(int usuarioId, bool ativo);
+        Task<IEnumerable<Agendamento>> ListarPorPacienteIdAsync(int usuarioId, int pacienteId, bool ativo);
     }
 }
