@@ -161,7 +161,7 @@ namespace ProjetoOdontologico.Api
         {
             try
             {
-                var listaAgendamentos = await _agendamentoAplicacao.ListarAgendamentoPorPacienteIdAsync(pacienteId, usuarioId, ativo);
+                var listaAgendamentos = await _agendamentoAplicacao.ListarAgendamentoPorPacienteIdAsync(usuarioId, pacienteId, ativo);
 
                 var listaAgendamentoResponse = listaAgendamentos.Select(agendamento => new AgendamentoResponse()
                 {
