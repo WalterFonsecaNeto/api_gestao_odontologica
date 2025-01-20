@@ -52,7 +52,7 @@ namespace ProjetoOdontologico.Api
 
         [HttpPut]
         [Route("AtualizarPorAgendamentoId/{agendamentoId}/Usuario/{usuarioId}")]
-        public async Task<IActionResult> AtualizarEspecialidadeAsync([FromRoute] int usuarioId, int agendamentoId, [FromBody] AgendamentoAtualizar agendamentoAtualizar)
+        public async Task<IActionResult> AtualizarAgendamentoAsync([FromRoute] int agendamentoId, int usuarioId, [FromBody] AgendamentoAtualizar agendamentoAtualizar)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace ProjetoOdontologico.Api
                     Descricao = agendamentoAtualizar.Descricao
                 };
 
-                await _agendamentoAplicacao.AtualizarAgendamentoAsync(agendamentoDominio, usuarioId, agendamentoId);
+                await _agendamentoAplicacao.AtualizarAgendamentoAsync(agendamentoDominio, agendamentoId, usuarioId);
 
                 return Ok("Agendamento atualizada com sucesso!");
             }
