@@ -30,7 +30,7 @@ namespace ProjetoOdontologico.Aplicacao
             }
             ValidarInformacoesUsuario(usuario);
             
-            var usuarioExiste = await _usuarioRepositorio.ValidarUsuario(usuario, true);
+            var usuarioExiste = await _usuarioRepositorio.ValidarUsuarioParaCadastro(usuario, true);
             
 
             if (usuarioExiste != null)
@@ -117,7 +117,7 @@ namespace ProjetoOdontologico.Aplicacao
             return await _usuarioRepositorio.ListarAsync(ativo);
         }
 
-        public async Task<Usuario> ValidarUsuario(Usuario usuario)
+        public async Task<Usuario> ValidarUsuarioParaLogin(Usuario usuario)
         {
             if (usuario == null)
             {
@@ -131,7 +131,7 @@ namespace ProjetoOdontologico.Aplicacao
             {
                 throw new Exception("Email não pode ser vazia");
             }
-            var usuarioEncontrado = await _usuarioRepositorio.ValidarUsuario(usuario, true);
+            var usuarioEncontrado = await _usuarioRepositorio.ValidarUsuarioParaLogin(usuario, true);
 
             if (usuarioEncontrado == null)
             {
@@ -144,6 +144,7 @@ namespace ProjetoOdontologico.Aplicacao
 
 
         }
+        
 
         #endregion
 

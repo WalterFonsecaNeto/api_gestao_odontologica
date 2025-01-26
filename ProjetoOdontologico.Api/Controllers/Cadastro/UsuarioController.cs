@@ -185,7 +185,7 @@ namespace ProjetoOdontologico.Api
                     Senha = usuarioValidar.Senha
                 };
 
-                usuarioDominio = await _usuarioAplicacao.ValidarUsuario(usuarioDominio);
+                usuarioDominio = await _usuarioAplicacao.ValidarUsuarioParaLogin(usuarioDominio);
 
                 var usuarioValido = new UsuarioResponse()
                 {

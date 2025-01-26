@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ProjetoOdontologico.Repositorio.Migrations
 {
     [DbContext(typeof(ProjetoOdontologicoContexto))]
-    [Migration("20241230201550_Inicial")]
+    [Migration("20250126043920_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
