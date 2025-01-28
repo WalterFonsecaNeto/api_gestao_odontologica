@@ -29,15 +29,15 @@ namespace ProjetoOdontologico.Aplicacao
                 throw new Exception("Senha não pode ser vazia");
             }
             ValidarInformacoesUsuario(usuario);
-            
+
             var usuarioExiste = await _usuarioRepositorio.ValidarUsuarioParaCadastro(usuario, true);
-            
+
 
             if (usuarioExiste != null)
             {
                 throw new Exception("Email já existe");
             }
-            
+
 
             // Quando tudo estiver correto, o usuário será salvo
             return await _usuarioRepositorio.SalvarAsync(usuario);
@@ -144,7 +144,7 @@ namespace ProjetoOdontologico.Aplicacao
 
 
         }
-        
+
 
         #endregion
 
@@ -164,7 +164,7 @@ namespace ProjetoOdontologico.Aplicacao
         {
             if (string.IsNullOrEmpty(usuario.Nome))
             {
-                usuarioEncontrado.Nome = usuarioEncontrado.Nome;
+                throw new Exception("Nome não pode ser vazio");
             }
             else
             {
@@ -172,7 +172,7 @@ namespace ProjetoOdontologico.Aplicacao
             }
             if (string.IsNullOrEmpty(usuario.Email))
             {
-                usuarioEncontrado.Email = usuarioEncontrado.Email;
+                throw new Exception("Email não pode ser vazio");
             }
             else
             {
