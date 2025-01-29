@@ -14,14 +14,12 @@ namespace ProjetoOdontologico.Api
 
         #endregion
 
-
         #region Construtores
         public FormaPagamentoController(IFormaPagamentoAplicacao formaPagamentoAplicacao)
         {
             _formaPagamentoAplicacao = formaPagamentoAplicacao;
         }
         #endregion
-
 
         #region Funções
         [HttpGet]
@@ -41,10 +39,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao obter forma de pagamento: {ex.Message}");
+                return BadRequest($"Erro ao obter forma de pagamento: {ex.Message}");
             }
         }
-
 
         [HttpGet]
         [Route("Listar/Usuario/{usuarioId}")]
@@ -63,10 +60,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao listar formas de pagamento: {ex.Message}");
+                return BadRequest($"Erro ao listar formas de pagamento: {ex.Message}");
             }
         }
-
 
         [HttpPost]
         [Route("Criar")]
@@ -86,10 +82,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar forma de pagamento: {ex.Message}");
+                return BadRequest($"Erro ao criar forma de pagamento: {ex.Message}");
             }
         }
-
 
         [HttpPut]
         [Route("Atualizar{formaPagamentoId}/Usuario{usuarioId}")]
@@ -108,10 +103,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao atualizar forma de pagamento: {ex.Message}");
+                return BadRequest($"Erro ao atualizar forma de pagamento: {ex.Message}");
             }
         }
-
 
         [HttpDelete]
         [Route("Deletar/{formaPagamentoId}/Usuario/{usuarioId}")]
@@ -125,7 +119,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao deletar forma de pagamento: {ex.Message}");
+                return BadRequest($"Erro ao deletar forma de pagamento: {ex.Message}");
             }
         }
 
@@ -141,7 +135,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao restaurar forma de pagamento: {ex.Message}");
+                return BadRequest($"Erro ao restaurar forma de pagamento: {ex.Message}");
             }
         }
 

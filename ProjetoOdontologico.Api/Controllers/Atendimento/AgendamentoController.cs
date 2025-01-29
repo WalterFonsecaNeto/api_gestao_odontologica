@@ -46,7 +46,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar agendamento: {ex.Message}");
+                return BadRequest($"Erro ao criar agendamento: {ex.Message}");
             }
         }
 
@@ -70,7 +70,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao atualizar agendamento: {ex.Message}");
+                return BadRequest($"Erro ao atualizar agendamento: {ex.Message}");
             }
         }
 
@@ -86,7 +86,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao deletar agendamento: {ex.Message}");
+                return BadRequest($"Erro ao deletar agendamento: {ex.Message}");
             }
         }
 
@@ -102,7 +102,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao restaurar agendamento: {ex.Message}");
+                return BadRequest($"Erro ao restaurar agendamento: {ex.Message}");
             }
         }
 
@@ -127,7 +127,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao obter agendamento: {ex.Message}");
+                return BadRequest($"Erro ao obter agendamento: {ex.Message}");
             }
         }
 
@@ -151,7 +151,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao listar especialidades: {ex.Message}");
+                return BadRequest($"Erro ao listar especialidades: {ex.Message}");
             }
         }
 
@@ -175,7 +175,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao listar especialidades: {ex.Message}");
+                return BadRequest($"Erro ao listar especialidades: {ex.Message}");
             }
         }
 

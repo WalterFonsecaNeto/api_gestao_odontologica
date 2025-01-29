@@ -45,7 +45,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao obter procedimento: {ex.Message}");
+                return BadRequest($"Erro ao obter procedimento: {ex.Message}");
             }
         }
 
@@ -70,7 +70,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao listar procedimento: {ex.Message}");
+                return BadRequest($"Erro ao listar procedimento: {ex.Message}");
             }
         }
 
@@ -95,7 +95,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar procedimento: {ex.Message}");
+                return BadRequest($"Erro ao criar procedimento: {ex.Message}");
             }
         }
 
@@ -119,7 +119,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao atualizar procedimento: {ex.Message}");
+                return BadRequest($"Erro ao atualizar procedimento: {ex.Message}");
             }
         }
 
@@ -136,7 +136,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao deletar procedimento: {ex.Message}");
+                return BadRequest($"Erro ao deletar procedimento: {ex.Message}");
             }
         }
 
@@ -152,7 +152,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao restaurar procedimento: {ex.Message}");
+                return BadRequest($"Erro ao restaurar procedimento: {ex.Message}");
             }
         }
         #endregion
