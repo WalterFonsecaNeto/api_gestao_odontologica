@@ -91,7 +91,7 @@ namespace ProjetoOdontologico.Api
 
                 var procedimentoId = await _procedimentoAplicacao.CriarProcedimentoAsync(procedimentoDominio);
 
-                return Ok($"Procedimento de ID: {procedimentoId} criado com sucesso!");
+                return Ok(procedimentoId);
             }
             catch (Exception ex)
             {
