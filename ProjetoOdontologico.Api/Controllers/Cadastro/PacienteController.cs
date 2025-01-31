@@ -48,7 +48,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao obter paciente: {ex.Message}");
+                return BadRequest($"Erro ao obter paciente: {ex.Message}");
             }
         }
 
@@ -77,7 +77,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao listar pacientes: {ex.Message}");
+                return BadRequest($"Erro ao listar pacientes: {ex.Message}");
             }
         }
 
@@ -107,7 +107,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar paciente: {ex.Message}");
+                return BadRequest($"Erro ao criar paciente: {ex.Message}");
             }
         }
 
@@ -135,7 +135,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao atualizar paciente: {ex.Message}");
+                return BadRequest($"Erro ao atualizar paciente: {ex.Message}");
             }
         }
 
@@ -152,7 +152,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao deletar paciente: {ex.Message}");
+                return BadRequest($"Erro ao deletar paciente: {ex.Message}");
             }
         }
 
@@ -169,7 +169,7 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao restaurar paciente: {ex.Message}");
+                return BadRequest($"Erro ao restaurar paciente: {ex.Message}");
             }
         }
 

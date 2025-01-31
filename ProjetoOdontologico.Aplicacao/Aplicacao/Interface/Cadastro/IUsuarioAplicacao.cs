@@ -12,6 +12,6 @@ namespace ProjetoOdontologico.Aplicacao
         Task DeletarUsuarioAsync(int usuarioId);
         Task RestaurarUsuarioAsync(int usuarioId);
         Task<IEnumerable<Usuario>> ListarUsuariosAsync(bool ativo);
-        Task<Usuario> ValidarUsuario(Usuario usuario);
+        Task<Usuario> ValidarUsuarioParaLogin(Usuario usuario);
     }
 }

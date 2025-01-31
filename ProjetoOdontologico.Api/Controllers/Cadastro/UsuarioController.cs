@@ -3,18 +3,15 @@ using ProjetoOdontologico.Api.Models;
 using ProjetoOdontologico.Aplicacao;
 using ProjetoOdontologico.Dominio.Entidades;
 
-
 namespace ProjetoOdontologico.Api
 {
     [ApiController]
     [Route("api/[controller]")]
-
     public class UsuarioController : ControllerBase
     {
         #region Atributos
         private readonly IUsuarioAplicacao _usuarioAplicacao;
         #endregion
-
 
         #region Construtores
         public UsuarioController(IUsuarioAplicacao usuarioAplicacao)
@@ -22,7 +19,6 @@ namespace ProjetoOdontologico.Api
             _usuarioAplicacao = usuarioAplicacao;
         }
         #endregion
-
 
         #region Funções
         [HttpGet]
@@ -44,10 +40,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar: {ex.Message}");
+                return BadRequest($"Erro ao obter usuário: {ex.Message}");
             }
         }
-
 
         [HttpPost]
         [Route("Criar")]
@@ -68,10 +63,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar: {ex.Message}");
+                return BadRequest($"Erro ao criar usuário: {ex.Message}");
             }
         }
-
 
         [HttpPut]
         [Route("Atualizar/{usuarioId}")]
@@ -91,10 +85,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar: {ex.Message}");
+                return BadRequest($"Erro ao atualizar usuário: {ex.Message}");
             }
         }
-
 
         [HttpPut]
         [Route("AtualizarSenha/{usuarioId}")]
@@ -111,10 +104,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar: {ex.Message}");
+                return BadRequest($"Erro ao atualizar senha: {ex.Message}");
             }
         }
-
 
         [HttpDelete]
         [Route("Deletar/{usuarioId}")]
@@ -128,10 +120,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar: {ex.Message}");
+                return BadRequest($"Erro ao deletar usuário: {ex.Message}");
             }
         }
-
 
         [HttpPut]
         [Route("Restaurar/{usuarioId}")]
@@ -145,10 +136,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar: {ex.Message}");
+                return BadRequest($"Erro ao restaurar usuário: {ex.Message}");
             }
         }
-
 
         [HttpGet]
         [Route("Listar")]
@@ -169,10 +159,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar: {ex.Message}");
+                return BadRequest($"Erro ao listar usuários: {ex.Message}");
             }
         }
-
 
         [HttpPost("Validar")]
         public async Task<IActionResult> ValidarUsuarioAsync([FromBody] UsuarioValidar usuarioValidar)
@@ -185,7 +174,7 @@ namespace ProjetoOdontologico.Api
                     Senha = usuarioValidar.Senha
                 };
 
-                usuarioDominio = await _usuarioAplicacao.ValidarUsuario(usuarioDominio);
+                usuarioDominio = await _usuarioAplicacao.ValidarUsuarioParaLogin(usuarioDominio);
 
                 var usuarioValido = new UsuarioResponse()
                 {
@@ -198,12 +187,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao validar usuario: {ex.Message}");
+                return BadRequest($"Erro ao validar usuário: {ex.Message}");
             }
         }
-
-
         #endregion
-
     }
 }

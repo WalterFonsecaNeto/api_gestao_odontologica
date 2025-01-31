@@ -13,14 +13,12 @@ namespace ProjetoOdontologico.Api
         private readonly IEspecialidadeAplicacao _especialidadeAplicacao;
         #endregion
 
-
         #region Construtores
         public EspecialidadeController(IEspecialidadeAplicacao especialidadeAplicacao)
         {
             _especialidadeAplicacao = especialidadeAplicacao;
         }
         #endregion
-
 
         #region Funções
         [HttpGet]
@@ -40,10 +38,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao obter especialidade: {ex.Message}");
+                return BadRequest($"Erro ao obter especialidade: {ex.Message}");
             }
         }
-
 
         [HttpGet]
         [Route("Listar/Usuario/{usuarioId}")]
@@ -62,10 +59,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao listar especialidades: {ex.Message}");
+                return BadRequest($"Erro ao listar especialidades: {ex.Message}");
             }
         }
-
 
         [HttpPost]
         [Route("Criar")]
@@ -85,10 +81,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao criar especialidade: {ex.Message}");
+                return BadRequest($"Erro ao criar especialidade: {ex.Message}");
             }
         }
-
 
         [HttpPut]
         [Route("Atualizar/{especialidadeId}/Usuario/{usuarioId}")]
@@ -107,10 +102,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao atualizar especialidade: {ex.Message}");
+                return BadRequest($"Erro ao atualizar especialidade: {ex.Message}");
             }
         }
-
 
         [HttpDelete]
         [Route("Deletar/{especialidadeId}/Usuario/{usuarioId}")]
@@ -124,10 +118,9 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao deletar especialidade: {ex.Message}");
+                return BadRequest($"Erro ao deletar especialidade: {ex.Message}");
             }
         }
-
 
         [HttpPut]
         [Route("Restaurar/{especialidadeId}/Usuario/{usuarioId}")]
@@ -141,11 +134,10 @@ namespace ProjetoOdontologico.Api
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao restaurar especialidade: {ex.Message}");
+                return BadRequest($"Erro ao restaurar especialidade: {ex.Message}");
             }
         }
 
         #endregion
-    
     }
 }
