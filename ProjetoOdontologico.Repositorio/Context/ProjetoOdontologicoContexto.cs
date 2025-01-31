@@ -5,7 +5,7 @@ using ProjetoOdontologico.Repositorio.Configurations;
 public class ProjetoOdontologicoContexto : DbContext
 {
     #region Atributos1
-    private string _stringConexao = "Server=WALTER-PC\\SQLEXPRESS;Database=SitemaGestaoOdontologica;TrustServerCertificate=true;Trusted_Connection=True;Connect Timeout=30;"; //Minha string de conexão com o banco de dados
+    private string _stringConexao = "Server=WALTER-PC\\SQLEXPRESS;Database=SitemaGestaoOdontologica;TrustServerCertificate=true;Trusted_Connection=True;Connect Timeout=60;"; //Minha string de conexão com o banco de dados
     private DbContextOptions _options; //Uma variavel vazia do tipo DbContextoptions que vai receber uma option
 
     #endregion
