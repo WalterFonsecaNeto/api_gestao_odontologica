@@ -1,3 +1,5 @@
+using System.Data;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using ProjetoOdontologico.Dominio.Entidades;
 
@@ -19,11 +21,12 @@ namespace ProjetoOdontologico.Repositorio
 
         public async Task AtualizarAsync(Especialidade especialidade)
         {
-            _contexto.Especialidades.Update(especialidade);
-            await _contexto.SaveChangesAsync();
+            var paramentros = new { EspecialidadeId = especialidade.Id, NovoNome = especialidade.Nome };
+
+            await _contexto.Database.GetDbConnection().ExecuteAsync("spAtualizarEspecialidade", paramentros, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<Especialidade> ObterPorIdAsync(int especialidadeId ,int usuarioId, bool ativo)
+        public async Task<Especialidade> ObterPorIdAsync(int especialidadeId, int usuarioId, bool ativo)
         {
             return await _contexto.Especialidades
                 .Where(e => e.Ativo == ativo && e.UsuarioId == usuarioId)

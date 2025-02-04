@@ -1,3 +1,5 @@
+using System.Data;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using ProjetoOdontologico.Dominio.Entidades;
 
@@ -19,8 +21,9 @@ namespace ProjetoOdontologico.Repositorio
 
         public async Task AtualizarAsync(Procedimento procedimento)
         {
-            _contexto.Procedimentos.Update(procedimento);
-            await _contexto.SaveChangesAsync();
+            var paramentros = new { ProcedimentoId = procedimento.Id, NovoNome = procedimento.Nome, NovaDescricao = procedimento.Descricao, NovoValor = procedimento.Valor, NovaEspecialidadeId = procedimento.EspecialidadeId};
+
+            await _contexto.Database.GetDbConnection().ExecuteAsync("spAtualizarProcedimento", paramentros, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<Procedimento> ObterPorIdAsync(int procedimentoID, int usuarioId ,bool ativo)

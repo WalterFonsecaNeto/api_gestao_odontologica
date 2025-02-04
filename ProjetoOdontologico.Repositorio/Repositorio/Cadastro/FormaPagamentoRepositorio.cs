@@ -1,3 +1,5 @@
+using System.Data;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using ProjetoOdontologico.Dominio.Entidades;
 
@@ -20,8 +22,9 @@ namespace ProjetoOdontologico.Repositorio
 
         public async Task AtualizarAsync(FormaPagamento formaPagamento)
         {
-            _contexto.FormasPagamento.Update(formaPagamento);
-            await _contexto.SaveChangesAsync();
+            var paramentros = new { FormaPagamentoId = formaPagamento.Id, NovoNome = formaPagamento.Nome };
+
+            await _contexto.Database.GetDbConnection().ExecuteAsync("spAtualizarFormaPagamento", paramentros, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<FormaPagamento> ObterPorIdAsync(int formaPagamentoID, int usuarioId, bool ativo)
