@@ -10,5 +10,6 @@ namespace ProjetoOdontologico.Repositorio
         Task DeletarAsync(Procedimento procedimento);
         Task RestaurarAsync(Procedimento procedimento);
         Task<IEnumerable<Procedimento>> ListarAsync(int usuarioId, bool ativo);
+        Task<IEnumerable<Procedimento>> ListarPorEspecialidadeIdAsync(int especialidadeId);
     }
 }

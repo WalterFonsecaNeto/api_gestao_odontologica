@@ -53,5 +53,11 @@ namespace ProjetoOdontologico.Repositorio
                 .Where(p => p.Ativo == ativo && p.UsuarioId == usuarioId) 
                 .ToListAsync();
         }
+        public async Task<IEnumerable<Procedimento>> ListarPorEspecialidadeIdAsync(int especialidadeId)
+        {
+            return await _contexto.Procedimentos
+                .Where(p => p.Ativo == true && p.EspecialidadeId == especialidadeId) 
+                .ToListAsync();
+        }
     }
 }

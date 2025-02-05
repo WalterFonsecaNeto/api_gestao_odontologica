@@ -87,7 +87,7 @@ namespace ProjetoOdontologico.Aplicacao
         {
             var listaFormasPagamento = await _formaPagamentoRepositorio.ListarAsync(usuarioId, ativo);
 
-            if (listaFormasPagamento == null)
+            if (listaFormasPagamento.Count() == 0)
             {
                 throw new Exception("Não existem formas de pagamento cadastradas.");
             }

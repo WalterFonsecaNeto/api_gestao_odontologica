@@ -87,7 +87,7 @@ namespace ProjetoOdontologico.Api
         }
 
         [HttpPut]
-        [Route("Atualizar{formaPagamentoId}/Usuario{usuarioId}")]
+        [Route("Atualizar/{formaPagamentoId}/Usuario/{usuarioId}")]
         public async Task<IActionResult> AtualizarFormaPagamentoAsync([FromRoute] int usuarioId, int formaPagamentoId, [FromBody] FormaPagamentoAtualizar formaPagamentoAtualizar)
         {
             try
