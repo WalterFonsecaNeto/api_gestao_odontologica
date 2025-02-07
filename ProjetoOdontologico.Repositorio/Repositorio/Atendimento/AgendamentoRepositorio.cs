@@ -54,10 +54,12 @@ namespace ProjetoOdontologico.Repositorio
 
         //? Lista de agendamentos de um determinado paciente
         public async Task<IEnumerable<Agendamento>> ListarPorPacienteIdAsync(int usuarioId, int pacienteId, bool ativo)
-        {
-            return await _contexto.Agendamentos
-                .Where(a => a.Ativo == ativo && a.UsuarioId == usuarioId && a.PacienteId == pacienteId) 
-                .ToListAsync();
-        }
+{
+    return await _contexto.Agendamentos
+        .Where(a => a.Ativo == ativo && a.UsuarioId == usuarioId && a.PacienteId == pacienteId)
+        .OrderBy(a => a.DataHora)  // Adicionando a ordenação pela DataHora
+        .ToListAsync();
+}
+
     }
 }
