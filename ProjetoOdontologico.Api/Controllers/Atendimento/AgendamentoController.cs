@@ -158,6 +158,7 @@ namespace ProjetoOdontologico.Api
                 {
                     Id = agendamento.Id,
                     PacienteNome = agendamento.Paciente.Nome,
+                    PacienteId = agendamento.PacienteId,
                     DataHora = agendamento.DataHora,
                     Status = agendamento.Status,
                     Descricao = agendamento.Descricao
