@@ -93,7 +93,7 @@ namespace ProjetoOdontologico.Aplicacao
         {
             var listaAgendamentos = await _agendamentoRepositorio.ListarPorUsuarioIdAsync(usuarioId, ativo);
 
-            if (listaAgendamentos == null)
+            if (listaAgendamentos.Count() == 0)   
             {
                 throw new Exception("Não existem agendamentos cadastrados.");
             }
@@ -104,7 +104,7 @@ namespace ProjetoOdontologico.Aplicacao
         {
             var listaAgendamentos = await _agendamentoRepositorio.ListarPorPacienteIdAsync(usuarioId, pacienteId, ativo);
 
-            if (listaAgendamentos == null)
+            if (listaAgendamentos.Count() == 0)
             {
                 throw new Exception("Não existem agendamentos por pacienteId cadastrados.");
             }

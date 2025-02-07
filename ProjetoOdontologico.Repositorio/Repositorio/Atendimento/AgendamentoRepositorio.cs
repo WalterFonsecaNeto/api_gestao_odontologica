@@ -48,6 +48,7 @@ namespace ProjetoOdontologico.Repositorio
         {
             return await _contexto.Agendamentos
                 .Where(a => a.Ativo == ativo && a.UsuarioId == usuarioId)
+                .Include(a => a.Paciente)
                 .ToListAsync();
         }
 
