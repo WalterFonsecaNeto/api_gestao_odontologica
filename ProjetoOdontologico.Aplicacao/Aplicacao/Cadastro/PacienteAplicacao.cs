@@ -82,11 +82,7 @@ namespace ProjetoOdontologico.Aplicacao
         public async Task<IEnumerable<Paciente>> ListarPacientesPorUsuarioAsync(int usuarioId, bool ativo)
         {
             var listaPaciente = await _pacienteRepositorio.ListarPorUsuarioAsync(usuarioId, ativo);
-
-            if (listaPaciente.Count() == 0)
-            {
-                throw new Exception("Não existem pacientes cadastrados.");
-            }
+            
             return listaPaciente;
         }
 
