@@ -37,7 +37,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 
 //Adicionar o serviço de banco de dados
-builder.Services.AddDbContext<ProjetoOdontologicoContexto>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ProjetoOdontologicoContexto>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQLConection")));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

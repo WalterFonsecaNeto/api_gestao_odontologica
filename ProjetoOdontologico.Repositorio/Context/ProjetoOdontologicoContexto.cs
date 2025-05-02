@@ -6,7 +6,7 @@ public class ProjetoOdontologicoContexto : DbContext
 {
     #region Atributos
     
-    private string _stringConexao = "Server=LAPTOP-V92N964C\\SQLEXPRESS;Database=SitemaGestaoOdontologica;TrustServerCertificate=true;Trusted_Connection=True;Connect Timeout=60;"; //Minha string de conexão com o banco de dados
+    private string _stringConexao = "Host=dpg-d0a2u4buibrs73anoe20-a.oregon-postgres.render.com;Database=postgresql_projeto_odontologico;Username=postgresql_projeto_odontologico_user;Password=ZuYAQWGZGLmPAppPO4GE8GGGytsjaD7P;Port=5432;SSL Mode=Require;Trust Server Certificate=true;";
     private DbContextOptions _options; //Uma variavel vazia do tipo DbContextoptions que vai receber uma option
 
     #endregion
@@ -42,7 +42,7 @@ public class ProjetoOdontologicoContexto : DbContext
     {
         if (_options == null)
         {
-            optionsBuilder.UseSqlServer(_stringConexao);
+            optionsBuilder.UseNpgsql(_stringConexao);
         }
 
     }
