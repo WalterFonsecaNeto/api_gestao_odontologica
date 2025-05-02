@@ -6,31 +6,31 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Adicione aplicações
 builder.Services.AddScoped<IEspecialidadeAplicacao, EspecialidadeAplicacao>();
-builder.Services.AddScoped<IFormaPagamentoAplicacao,FormaPagamentoAplicacao>();
-builder.Services.AddScoped<IPacienteAplicacao,PacienteAplicacao>();
-builder.Services.AddScoped<IProcedimentoAplicacao,ProcedimentoAplicacao>();
+builder.Services.AddScoped<IFormaPagamentoAplicacao, FormaPagamentoAplicacao>();
+builder.Services.AddScoped<IPacienteAplicacao, PacienteAplicacao>();
+builder.Services.AddScoped<IProcedimentoAplicacao, ProcedimentoAplicacao>();
 builder.Services.AddScoped<IUsuarioAplicacao, UsuarioAplicacao>();
 builder.Services.AddScoped<IAgendamentoAplicacao, AgendamentoAplicacao>();
 
 
 // Adicione as interfaces de banco de dados
-builder.Services.AddScoped<IEspecialidadeRepositorio,EspecialidadeRepositorio>();
-builder.Services.AddScoped<IFormaPagamentoRepositorio,FormaPagamentoRepositorio>();
-builder.Services.AddScoped<IPacienteRepositorio,PacienteRepositorio>();
-builder.Services.AddScoped<IProcedimentoRepositorio,ProcedimentoRepositorio>();
+builder.Services.AddScoped<IEspecialidadeRepositorio, EspecialidadeRepositorio>();
+builder.Services.AddScoped<IFormaPagamentoRepositorio, FormaPagamentoRepositorio>();
+builder.Services.AddScoped<IPacienteRepositorio, PacienteRepositorio>();
+builder.Services.AddScoped<IProcedimentoRepositorio, ProcedimentoRepositorio>();
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IAgendamentoRepositorio, AgendamentoRepositorio>();
 
 
 
-builder.Services.AddCors(options => 
+builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(builder =>
-    {
-        builder.AllowAnyOrigin()     // Permite qualquer origem
-               .AllowAnyHeader()    // Permite qualquer cabeçalho
-               .AllowAnyMethod();   // Permite qualquer método (GET, POST, PUT, DELETE, etc.)
-    });
+	options.AddDefaultPolicy(builder =>
+	{
+		builder.AllowAnyOrigin()     // Permite qualquer origem
+			   .AllowAnyHeader()    // Permite qualquer cabeçalho
+			   .AllowAnyMethod();   // Permite qualquer método (GET, POST, PUT, DELETE, etc.)
+	});
 });
 
 
@@ -49,12 +49,11 @@ builder.WebHost.UseUrls($"http://*:{port}");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseCors();
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseCors();
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 
