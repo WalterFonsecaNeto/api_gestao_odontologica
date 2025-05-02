@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Xml;
 using ProjetoOdontologico.Dominio.Entidades;
 using ProjetoOdontologico.Repositorio;
@@ -44,6 +45,21 @@ namespace ProjetoOdontologico.Aplicacao
 
             await _agendamentoRepositorio.AtualizarAsync(agendamentoEncontrado);
         }
+        public async Task AtualizarStatusAgendamentoAsync(string status, int agendamentoId, int usuarioId)
+        {
+            var agendamentoEncontrado = await _agendamentoRepositorio.ObterPorIdAsync(agendamentoId, usuarioId, true);
+
+            if (string.IsNullOrEmpty(status))
+            {
+                throw new ArgumentException("Status do agendamento não pode ser vazio.");
+            }
+
+            ValidarExistenciaDoAgendamento(agendamentoEncontrado);
+
+            agendamentoEncontrado.Status = status;
+
+            await _agendamentoRepositorio.AtualizarAsync(agendamentoEncontrado);
+        }
 
         public async Task<Agendamento> ObterAgendamentoPorIdAsync(int agendamentoId, int usuarioId, bool ativo)
         {
@@ -72,23 +88,23 @@ namespace ProjetoOdontologico.Aplicacao
             await _agendamentoRepositorio.RestaurarAsync(agendamentoEncontrado);
         }
 
-        
+
         public async Task<IEnumerable<Agendamento>> ListarAgendamentoPorUsuarioIdAsync(int usuarioId, bool ativo)
         {
             var listaAgendamentos = await _agendamentoRepositorio.ListarPorUsuarioIdAsync(usuarioId, ativo);
 
-            if (listaAgendamentos == null)
+            if (listaAgendamentos.Count() == 0)   
             {
                 throw new Exception("Não existem agendamentos cadastrados.");
             }
             return listaAgendamentos;
         }
-        
+
         public async Task<IEnumerable<Agendamento>> ListarAgendamentoPorPacienteIdAsync(int usuarioId, int pacienteId, bool ativo)
         {
             var listaAgendamentos = await _agendamentoRepositorio.ListarPorPacienteIdAsync(usuarioId, pacienteId, ativo);
 
-            if (listaAgendamentos == null)
+            if (listaAgendamentos.Count() == 0)
             {
                 throw new Exception("Não existem agendamentos por pacienteId cadastrados.");
             }
@@ -149,5 +165,5 @@ namespace ProjetoOdontologico.Aplicacao
 
     }
 
-    
+
 }

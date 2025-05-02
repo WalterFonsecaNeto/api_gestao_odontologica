@@ -73,6 +73,21 @@ namespace ProjetoOdontologico.Api
                 return BadRequest($"Erro ao atualizar agendamento: {ex.Message}");
             }
         }
+        [HttpPut]
+        [Route("AtualizarStatusPorAgendamentoId/{agendamentoId}/Usuario/{usuarioId}")]
+        public async Task<IActionResult> AtualizarStatusAgendamentoAsync([FromRoute] int agendamentoId, int usuarioId, [FromBody] string status)
+        {
+            try
+            {
+                await _agendamentoAplicacao.AtualizarStatusAgendamentoAsync(status, agendamentoId, usuarioId);
+
+                return Ok("Agendamento atualizada com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao atualizar agendamento: {ex.Message}");
+            }
+        }
 
         [HttpDelete]
         [Route("DeletarPorAgendamentoId/{agendamentoId}/Usuario/{usuarioId}")]
@@ -139,9 +154,10 @@ namespace ProjetoOdontologico.Api
             {
                 var listaAgendamentos = await _agendamentoAplicacao.ListarAgendamentoPorUsuarioIdAsync(usuarioId, ativo);
 
-                var listaAgendamentoResponse = listaAgendamentos.Select(agendamento => new AgendamentoResponse()
+                var listaAgendamentoResponse = listaAgendamentos.Select(agendamento => new AgendamentoListarTodosResponse()
                 {
                     Id = agendamento.Id,
+                    PacienteNome = agendamento.Paciente.Nome,
                     PacienteId = agendamento.PacienteId,
                     DataHora = agendamento.DataHora,
                     Status = agendamento.Status,

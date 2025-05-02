@@ -8,15 +8,17 @@ namespace ProjetoOdontologico.Aplicacao
 
         #region Atributos
         readonly IEspecialidadeRepositorio _especialidadeRepositorio;
+        readonly IProcedimentoRepositorio _procedimentoRepositorio;
         readonly IUsuarioRepositorio _usuarioRepositorio;
         #endregion
 
 
         #region Contrutores 
-        public EspecialidadeAplicacao(IEspecialidadeRepositorio especialidadeRepositorio, IUsuarioRepositorio usuarioRepositorio)
+        public EspecialidadeAplicacao(IEspecialidadeRepositorio especialidadeRepositorio, IUsuarioRepositorio usuarioRepositorio, IProcedimentoRepositorio procedimentoRepositorio) 
         {
             _especialidadeRepositorio = especialidadeRepositorio;
             _usuarioRepositorio = usuarioRepositorio;
+            _procedimentoRepositorio = procedimentoRepositorio;
         }
         #endregion
 
@@ -62,10 +64,16 @@ namespace ProjetoOdontologico.Aplicacao
         public async Task DeletarEspecialidadeAsync(int especialidadeId, int usuarioId)
         {
             var especialidadeEncontrada = await _especialidadeRepositorio.ObterPorIdAsync(especialidadeId, usuarioId, true);
+            
+            var existeProcedimentos = await _procedimentoRepositorio.ListarPorEspecialidadeIdAsync(especialidadeId);
+            
+            if (existeProcedimentos.Any())
+            {
+                throw new Exception("Existem procedimentos vinculados a esta especialidade.");
+            }
 
             ValidarExistenciaDaEspecialidade(especialidadeEncontrada);
 
-            ValidarInformacoesParaExclusao(especialidadeEncontrada);//! NÃO TEM NADA IMPLEMENTADO AINDA
 
             await _especialidadeRepositorio.DeletarAsync(especialidadeEncontrada);
         }
@@ -83,7 +91,7 @@ namespace ProjetoOdontologico.Aplicacao
         {
             var listaEspecialidades = await _especialidadeRepositorio.ListarAsync(usuarioId, ativo);
 
-            if (listaEspecialidades == null)
+            if (listaEspecialidades.Count() == 0)
             {
                 throw new Exception("Não existem especialidades cadastradas.");
             }
@@ -130,10 +138,6 @@ namespace ProjetoOdontologico.Aplicacao
         }
 
 
-        private static void ValidarInformacoesParaExclusao(Especialidade especialidadeEcontrada)
-        {
-            //! QUANDO FOR REALIZAR A EXCLUSÃO VERIFICAR SE A ESPECIALIDADE ESTÁ SENDO UTILIZADA
-        }
         #endregion
 
     }

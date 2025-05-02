@@ -83,7 +83,7 @@ namespace ProjetoOdontologico.Aplicacao
         {
             var listaPaciente = await _pacienteRepositorio.ListarPorUsuarioAsync(usuarioId, ativo);
 
-            if (listaPaciente == null)
+            if (listaPaciente.Count() == 0)
             {
                 throw new Exception("Não existem pacientes cadastrados.");
             }

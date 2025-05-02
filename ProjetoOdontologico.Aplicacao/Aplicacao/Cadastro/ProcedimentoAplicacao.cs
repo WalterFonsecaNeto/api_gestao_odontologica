@@ -71,6 +71,7 @@ namespace ProjetoOdontologico.Aplicacao
 
         public async Task DeletarProcedimentoAsync(int procedimentoId, int usuarioId)
         {
+
             var procedimentoEncontrado = await _procedimentoRepositorio.ObterPorIdAsync(procedimentoId, usuarioId, true);
 
             ValidarExistenciaDoProcedimento(procedimentoEncontrado);
