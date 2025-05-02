@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -13,12 +14,12 @@ namespace ProjetoOdontologico.Repositorio.Migrations
                 name: "Usuarios",
                 columns: table => new
                 {
-                    UsuarioId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Senha = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    UsuarioId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nome = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Senha = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Ativo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,11 +30,11 @@ namespace ProjetoOdontologico.Repositorio.Migrations
                 name: "Especialidades",
                 columns: table => new
                 {
-                    EspecialidadeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    EspecialidadeId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsuarioId = table.Column<int>(type: "integer", nullable: false),
+                    Nome = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Ativo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,11 +50,11 @@ namespace ProjetoOdontologico.Repositorio.Migrations
                 name: "FormasPagamento",
                 columns: table => new
                 {
-                    FormaPagamentoID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    NomeForma = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    FormaPagamentoID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsuarioId = table.Column<int>(type: "integer", nullable: false),
+                    NomeForma = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Ativo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,18 +70,18 @@ namespace ProjetoOdontologico.Repositorio.Migrations
                 name: "Pacientes",
                 columns: table => new
                 {
-                    PacienteID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PacienteID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsuarioId = table.Column<int>(type: "integer", nullable: false),
+                    Nome = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     DataNascimento = table.Column<DateTime>(type: "DATE", nullable: false),
-                    Genero = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    CPF = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    Endereco = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Telefone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Genero = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    CPF = table.Column<string>(type: "character varying(14)", maxLength: 14, nullable: false),
+                    Endereco = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    Telefone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
+                    Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     HistoricoMedico = table.Column<string>(type: "TEXT", nullable: true),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    Ativo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,14 +97,14 @@ namespace ProjetoOdontologico.Repositorio.Migrations
                 name: "Procedimentos",
                 columns: table => new
                 {
-                    ProcedimentoID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ProcedimentoID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsuarioId = table.Column<int>(type: "integer", nullable: false),
+                    Nome = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Descricao = table.Column<string>(type: "TEXT", nullable: true),
-                    Valor = table.Column<decimal>(type: "DECIMAL(18,2)", nullable: false),
-                    EspecialidadeID = table.Column<int>(type: "int", nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    Valor = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    EspecialidadeID = table.Column<int>(type: "integer", nullable: false),
+                    Ativo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -124,15 +125,15 @@ namespace ProjetoOdontologico.Repositorio.Migrations
                 name: "MovimentacoesFinanceiras",
                 columns: table => new
                 {
-                    MovimentacaoFinanceiraID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioID = table.Column<int>(type: "int", nullable: false),
-                    TipoMovimento = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DataMovimentacao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    FormaPagamentoID = table.Column<int>(type: "int", nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    MovimentacaoFinanceiraID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsuarioID = table.Column<int>(type: "integer", nullable: false),
+                    TipoMovimento = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    Valor = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    DataMovimentacao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Descricao = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    FormaPagamentoID = table.Column<int>(type: "integer", nullable: false),
+                    Ativo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -153,14 +154,14 @@ namespace ProjetoOdontologico.Repositorio.Migrations
                 name: "Agendamentos",
                 columns: table => new
                 {
-                    AgendamentoID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioID = table.Column<int>(type: "int", nullable: false),
-                    DataHora = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PacienteID = table.Column<int>(type: "int", nullable: false),
+                    AgendamentoID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsuarioID = table.Column<int>(type: "integer", nullable: false),
+                    DataHora = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    PacienteID = table.Column<int>(type: "integer", nullable: false),
                     Descricao = table.Column<string>(type: "TEXT", nullable: true),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    Ativo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -181,14 +182,14 @@ namespace ProjetoOdontologico.Repositorio.Migrations
                 name: "ContasReceber",
                 columns: table => new
                 {
-                    ContaReceberID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioID = table.Column<int>(type: "int", nullable: false),
-                    PacienteID = table.Column<int>(type: "int", nullable: false),
-                    DataVencimento = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ValorReceber = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    ContaReceberID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsuarioID = table.Column<int>(type: "integer", nullable: false),
+                    PacienteID = table.Column<int>(type: "integer", nullable: false),
+                    DataVencimento = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ValorReceber = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    Status = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    Ativo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -209,13 +210,13 @@ namespace ProjetoOdontologico.Repositorio.Migrations
                 name: "Orcamentos",
                 columns: table => new
                 {
-                    OrcamentoID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioID = table.Column<int>(type: "int", nullable: false),
-                    PacienteID = table.Column<int>(type: "int", nullable: false),
-                    DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    OrcamentoID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsuarioID = table.Column<int>(type: "integer", nullable: false),
+                    PacienteID = table.Column<int>(type: "integer", nullable: false),
+                    DataCriacao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Total = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    Ativo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -236,13 +237,13 @@ namespace ProjetoOdontologico.Repositorio.Migrations
                 name: "OrcamentoProcedimentos",
                 columns: table => new
                 {
-                    OrcamentoProcedimentoID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrcamentoID = table.Column<int>(type: "int", nullable: false),
-                    ProcedimentoID = table.Column<int>(type: "int", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    OrcamentoProcedimentoID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    OrcamentoID = table.Column<int>(type: "integer", nullable: false),
+                    ProcedimentoID = table.Column<int>(type: "integer", nullable: false),
+                    Descricao = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    Valor = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    Ativo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
