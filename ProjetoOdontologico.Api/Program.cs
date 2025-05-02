@@ -25,14 +25,14 @@ builder.Services.AddScoped<IAgendamentoRepositorio, AgendamentoRepositorio>();
 
 builder.Services.AddCors(options => 
 {
-	options.AddDefaultPolicy(builder =>
-	{
-		builder.WithOrigins("http://localhost:3000")
-			.SetIsOriginAllowedToAllowWildcardSubdomains()
-			.AllowAnyHeader()
-			.AllowAnyMethod();
-	});
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()     // Permite qualquer origem
+               .AllowAnyHeader()    // Permite qualquer cabeçalho
+               .AllowAnyMethod();   // Permite qualquer método (GET, POST, PUT, DELETE, etc.)
+    });
 });
+
 
 builder.Services.AddControllers();
 
@@ -42,6 +42,9 @@ builder.Services.AddDbContext<ProjetoOdontologicoContexto>(options => options.Us
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+builder.WebHost.UseUrls($"http://*:{port}");
 
 var app = builder.Build();
 
